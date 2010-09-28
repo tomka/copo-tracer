@@ -333,11 +333,11 @@ public:
 	operator mat<S>()
 	{
 		mat<S> u(_nrows,_ncols);
-		mat<S>::iterator it = u.begin();
+		typename mat<S>::iterator it = u.begin();
 #ifdef _HAS_CPP0X
 		std::for_each(begin(),end(),[&it](const T& v){*it++ = (S) v; });
 #else
-		mat<S>::iterator end = u.end();
+		typename mat<S>::iterator end = u.end();
 		iterator vit = begin();
 		while(it != end)
 			*it++ = (S) *vit++;
@@ -933,7 +933,7 @@ vec<T> operator*(const mat<T>& m, const vec<T>& v)
 	vec<T> r;
 	r.zeros(m.nrows());
 	
-	vec<T>::const_iterator it = v.begin();  
+	typename vec<T>::const_iterator it = v.begin();  
 	for(size_t i = 0; i < m.ncols(); i++)
 		saxpy(*it++,m.col_begin(i), m.col_end(i),r.begin());
 	
@@ -947,7 +947,7 @@ vec<T> operator*(const mat<T>& m, const tiny_vec<T,N>& v)
 	vec<T> r;
 	r.zeros(m.nrows());
 	
-	vec<T>::const_iterator it = v.begin();  
+	typename vec<T>::const_iterator it = v.begin();  
 	for(size_t i = 0; i < m.ncols(); i++)
 		saxpy(*it++,m.col_begin(i), m.col_end(i),r.begin());
 	
@@ -1422,7 +1422,7 @@ template <typename T>
 mat<T> ones(size_t m, size_t n)
 {
 	mat<T> r(m,n);
-	r=(T)1
+	r=(T)1;
 	return r;
 }
 
@@ -1478,7 +1478,7 @@ template <typename T>
 mat<T> cross_mat(vec<T>& v)
 {
 	mat<T> C(3,3);
-	mat<T>::iterator it = C.begin();
+	typename mat<T>::iterator it = C.begin();
 	
 	*it++ = 0;
 	*it++ = v(2);
@@ -1500,7 +1500,7 @@ template <typename T>
 mat<T> cross_mat(tiny_vec<T,3>& v)
 {
 	mat<T> C(3,3);
-	mat<T>::iterator it = C.begin();
+	typename mat<T>::iterator it = C.begin();
 	
 	*it++ = 0;
 	*it++ = v(2);
@@ -1678,9 +1678,9 @@ template <typename T>
 mat<T> rgb_2_gray(const mat<tiny_vec<T,3> > & rgb_img)
 {
 	mat<T> result(rgb_img.w(),rgb_img.h());	
-	mat<T>::iterator rit=result.begin();
+	typename mat<T>::iterator rit=result.begin();
 	
-	for(mat<tiny_vec<T,3 > >::const_iterator it = rgb_img.begin();it != rgb_img.end(); it++)
+	for(typename mat<tiny_vec<T,3 > >::const_iterator it = rgb_img.begin();it != rgb_img.end(); it++)
 		*rit++ = rgb_2_gray(*it);
 
 	return result;

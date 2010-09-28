@@ -19,7 +19,7 @@ public:
 		return _data[j][i];
 	}
 
-	T operator()(int i,int j) const
+	T operator()(const int i,const int j) const
 	{
 		return _data[j][i];
 	}
@@ -48,7 +48,7 @@ public:
 	{
 		for(int j = 0; j < N; j++)
 			for(int i = 0; i < M; i++)
-				operator(i,j)*=s;
+				operator()(i,j)*=s;
 
 		return *this;
 	}
@@ -64,7 +64,7 @@ public:
 	{
 		for(int j = 0; j < N; j++)
 			for(int i = 0; i < M; i++)
-				operator(i,j)*=s;
+				operator()(i,j)*=s;
 
 		return *this;
 	}
@@ -79,8 +79,9 @@ public:
 	tiny_mat<T,M,N>& operator*=(double s)
 	{
 		for(int j = 0; j < N; j++)
-			for(int i = 0; i < M; i++)
-				operator(i,j)*=s;
+			for(int i = 0; i < M; i++) {
+                operator()(i,j)*=s;
+            }
 
 		return *this;
 	}
@@ -100,7 +101,7 @@ public:
 
 		for(int j = 0; j < N; j++)
 			for(int i = 0; i < M; i++)
-				r(i) += v(j)*operator(i,j);
+				r(i) += v(j)*operator()(i,j);
 		return r;
 	}
 
@@ -112,7 +113,7 @@ public:
 		for(int k = 0; k < P; k++)
 			for(int j = 0; j < N; j++)
 				for(int i = 0; i < M; i++)
-					r(i,k) += m(j,k)*operator(i,j);
+					r(i,k) += m(j,k)*operator()(i,j);
 		return r;
 	}
 

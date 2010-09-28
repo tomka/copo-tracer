@@ -12,7 +12,7 @@ class plane: public primitive
 public:
 	plane();
 	
-	plane(tiny_vec<float,3>& nml, float d);
+	plane(const tiny_vec<float,3>& nml, float d);
 
 	bool closest_intersection(intersection_info* hit, float min_lambda);
 	

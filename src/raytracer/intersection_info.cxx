@@ -104,6 +104,6 @@ intersection_info::intersection_info():object(NULL),lambda(std::numeric_limits<f
 {
 }
 
-intersection_info::intersection_info(ray<float>& r, float l) : incoming_ray(r),lambda(l),object(NULL)
+intersection_info::intersection_info(const ray<float>& r, float l) : incoming_ray(r),lambda(l),object(NULL)
 {
 }

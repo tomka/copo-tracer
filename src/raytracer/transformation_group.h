@@ -17,7 +17,7 @@ public:
 
 	transformation_group(mat<float>& tr);
 
-	void set_transformation(mat<float>& T);
+	void set_transformation(const mat<float>& T);
 
 	virtual bool closest_intersection(intersection_info* hit, float min_lambda);
 

@@ -9,7 +9,11 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#ifdef __linux__
+#include <sys/stat.h>
+#else
 #include <direct.h>
+#endif
 
 inline std::string get_file_ending(const std::string& filename)
 {
@@ -87,13 +91,21 @@ inline bool file_exists(const std::string& filename)
  
 void mkdir(const std::string& foldername)
 {
+#ifdef __linux__
+	 mkdir(foldername.c_str(), 0777);
+#else
 	 _mkdir(foldername.c_str());
+#endif
 }
 
  
 void rmdir(const std::string& foldername)
 {
+#ifdef __linux__
+	 rmdir(foldername.c_str());
+#else
 	 _rmdir(foldername.c_str());
+#endif
 }
 
 

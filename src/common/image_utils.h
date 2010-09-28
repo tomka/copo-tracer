@@ -7,12 +7,13 @@
 
 #include "mat.h"
 #include "tiny_mat.h"
-
+#include "tiny_vec.h"
+#include <limits>
 
 typedef mat<tiny_vec<unsigned char,3> > rgb_image;
 typedef mat<unsigned char> grayscale_image;
 typedef mat<float> float_image;
-typedef mat<tiny_vec<float,2>> vec2f_image;
+typedef mat<tiny_vec<float,2> > vec2f_image;
 
 typedef std::vector<rgb_image> rgb_image_sequence;
 typedef std::vector<grayscale_image> grayscale_image_sequence;
@@ -132,9 +133,17 @@ inline mat<float> div(mat<tiny_vec<float,2> >& xi,float s=1.0f)
 //normalize image between lo and hi
 inline void normalize(mat<float>& img,float lo=0.0f, float hi=1.0f)
 {
-	auto minmax = std::minmax_element(img.begin(),img.end());
-	float imin = *(minmax.first);
-	float imax = *(minmax.second);
+    typedef mat<float>::iterator m_it;
+	float imin = std::numeric_limits<float>::max();
+	float imax = std::numeric_limits<float>::min();
+
+	for (m_it it = img.begin(); it != img.end(); it++) {
+        float val = *it;
+        if (val < imin)
+            imin = val;
+        if (val > imax)
+            imax = val;
+    }
 	
 	float s = (hi-lo)/(imax-imin);
 	
@@ -149,9 +158,9 @@ template <typename T>
 mat<tiny_vec<T,3> > gray_2_rgb(const mat<T>  & gray_img)
 {
 	mat<tiny_vec<T,3> > result(gray_img.w(),gray_img.h());	
-	mat<tiny_vec<T,3> >::iterator rit=result.begin();
+	typename mat<tiny_vec<T,3> >::iterator rit=result.begin();
 	
-	for(mat<T>::const_iterator it = gray_img.begin();it != gray_img.end(); it++)
+	for(typename mat<T>::const_iterator it = gray_img.begin();it != gray_img.end(); it++)
 		*rit++ = gray_2_rgb(*it);
 
 	return result;

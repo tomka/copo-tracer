@@ -10,7 +10,7 @@
 
 plane::plane():normal(0.0f,1.0f,0.0f),distance(0){}
 
-plane::plane(tiny_vec<float,3>& nml, float d)
+plane::plane(const tiny_vec<float,3>& nml, float d)
 {
 	normal=nml;
 	normal.normalize();

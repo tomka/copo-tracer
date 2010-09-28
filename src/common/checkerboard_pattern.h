@@ -8,10 +8,11 @@
 #include "image_utils.h"
 
 //create a checker board pattern
-inline rgb_image create_checkerboard_pattern(int resx, int resy,int n, int m)
+template<typename T>
+inline mat< tiny_vec<T,3> > create_checker_board(int resx, int resy,int n, int m)
 {
 
-	rgb_image pattern(resx,resy);
+	mat< tiny_vec<T,3> > pattern(resx,resy);
 
 	for(int y = 0; y < (int)pattern.h(); y++)
 	{

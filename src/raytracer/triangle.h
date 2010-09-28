@@ -11,10 +11,10 @@ class triangle: public primitive
 {
 public:
 
-	triangle(tiny_vec<float,3>& p0,tiny_vec<float,3>& p1,tiny_vec<float,3>& p2,
-		tiny_vec<float,3>& n1,tiny_vec<float,3>& n2,tiny_vec<float,3>& n3);
+	triangle(const tiny_vec<float,3>& p0, const tiny_vec<float,3>& p1, const tiny_vec<float,3>& p2,
+		const tiny_vec<float,3>& n1, const tiny_vec<float,3>& n2, const tiny_vec<float,3>& n3);
 	
-	triangle(tiny_vec<float,3>& p0, tiny_vec<float,3>& p1, tiny_vec<float,3>& p2);
+	triangle(const tiny_vec<float,3>& p0, const tiny_vec<float,3>& p1, const tiny_vec<float,3>& p2);
 
 	std::pair<tiny_vec<float,3>, tiny_vec<float,3> > calc_bounds();
 	

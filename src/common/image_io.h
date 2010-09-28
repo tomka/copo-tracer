@@ -16,52 +16,51 @@ inline void write16bit(int n, FILE* fp)
   fwrite(bytes, 2, sizeof(unsigned char),fp);
 }
 
-
 inline bool write_tga( mat<tiny_vec<unsigned char,3> >& img, const std::string& filename) 
 {
 	FILE *fp =fopen(filename.c_str(),"wb");
-	if(fp)
 	{
+        perror( "error" );
+		std::cerr << "can't open file for writing: "<< filename<<"\n";
 
-		// fixed header values for the subset of TGA we use for writing
-	   unsigned char TGAHeaderColor[12] = 
-	  { 0,// 0 ID length = no id
-		0,// 1 color map type = no color map
-		2,// 2 image type = uncompressed true color
-		0, 0, 0, 0, 0,// color map spec = empty
-		0, 0,  // x origin of image 
-		0, 0   // y origin of image
-	  };
-	
-	   fwrite(TGAHeaderColor, 12, sizeof(unsigned char),fp);
- 
-	  write16bit(img.w(),fp);  
-	  write16bit(img.h(),fp);  
- 
- 
-	   putc(24,fp); 
-	   putc(0x00,fp);
-	   unsigned char r,g,b;
-	   for(int y = (int)img.h()-1; y >= 0; y--)
-		   for(int x = 0; x < (int)img.w(); x++)
-		   {
-			   r = img(x,y)[0];
-			   g = img(x,y)[1];
-			   b = img(x,y)[2];
-			 
-   
-			   fwrite((void*)&b,1 , sizeof(char),fp);
-			   fwrite((void*)&g,1 , sizeof(char),fp);
-			   fwrite((void*)&r,1 , sizeof(char),fp);
-			  
-
-		   }
-
-
-	   fclose(fp);
-	   return true;
+		return false;
 	}
-	return false;
+	// fixed header values for the subset of TGA we use for writing
+    unsigned char TGAHeaderColor[12] = 
+    { 0,// 0 ID length = no id
+      0,// 1 color map type = no color map
+      2,// 2 image type = uncompressed true color
+      0, 0, 0, 0, 0,// color map spec = empty
+      0, 0,  // x origin of image 
+      0, 0   // y origin of image
+    };
+
+    fwrite(TGAHeaderColor, 12, sizeof(unsigned char),fp);
+
+    write16bit(img.w(),fp);  
+    write16bit(img.h(),fp);  
+
+    putc(24,fp); 
+    putc(0x00,fp);
+    unsigned char r,g,b;
+    for(int y = (int)img.h()-1; y >= 0; y--)
+        for(int x = 0; x < (int)img.w(); x++)
+        {
+            r = img(x,y)[0];
+            g = img(x,y)[1];
+            b = img(x,y)[2];
+         
+
+            fwrite((void*)&b,1 , sizeof(char),fp);
+            fwrite((void*)&g,1 , sizeof(char),fp);
+            fwrite((void*)&r,1 , sizeof(char),fp);
+          
+
+        }
+
+
+    fclose(fp);
+    return true;
 }
 
 
@@ -75,6 +74,7 @@ inline bool write_bmp(const mat<tiny_vec<unsigned char,3> >& img, const std::str
 	FILE* fp = fopen(filename.c_str(), "wb");
 	if (!fp) 
 	{
+        perror( "error" );
 		std::cerr << "can't open file for writing: "<< filename<<"\n";
 
 		return false;

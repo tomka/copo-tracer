@@ -114,7 +114,7 @@ void kd_tree::add_obj_mesh(const std::string& filename, bool scale)
 	 {	
 		
 		 if(scale)
-			reader.rescale(tiny_vec<float,3>(4,-2,4),tiny_vec<float,3>(8,6,8));
+			reader.rescale(tiny_vec<float,3>(4,-2,4),tiny_vec<float,3>(8,6,8), true);
 		
 		triangle *tri;
 		for(unsigned i = 0; i < reader.faces.size(); i++)

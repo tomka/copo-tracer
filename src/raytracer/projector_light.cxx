@@ -62,8 +62,10 @@ void projector_light::set_look_at(const tiny_vec<float,3>& eye, const tiny_vec<f
 
 projector_light::projector_light(mat<tiny_vec<float,3> >* img,float fovy)
 {
-	projector_image.set_interpolation(sampler_2d<tiny_vec<float,3>>::BILINEAR);
-	projector_image.set_wrapping(sampler_2d<tiny_vec<float,3>>::CLAMP_TO_BORDER);
+	projector_image.set_interpolation(
+        sampler_2d< tiny_vec<float,3> >::BILINEAR);
+	projector_image.set_wrapping(
+        sampler_2d< tiny_vec<float,3> >::CLAMP_TO_BORDER);
 	projector_image.set_border_color(tiny_vec<float,3>(0,0,0));
 
 	projector_image.bind_image(img);
@@ -81,8 +83,10 @@ projector_light::projector_light(mat<tiny_vec<float,3> >* img,float fovy)
 
 projector_light::projector_light()
 {
-	projector_image.set_interpolation(sampler_2d<tiny_vec<float,3>>::BILINEAR);
-	projector_image.set_wrapping(sampler_2d<tiny_vec<float,3>>::CLAMP_TO_BORDER);
+	projector_image.set_interpolation(
+        sampler_2d< tiny_vec<float,3> >::BILINEAR);
+	projector_image.set_wrapping(
+        sampler_2d< tiny_vec<float,3> >::CLAMP_TO_BORDER);
 	projector_image.set_border_color(tiny_vec<float,3>(0,0,0));
 
 	K = eye<float>(3);

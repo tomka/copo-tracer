@@ -7,8 +7,8 @@
 
 
 
-triangle::triangle(tiny_vec<float,3>& p0,tiny_vec<float,3>& p1,tiny_vec<float,3>& p2,
-	tiny_vec<float,3>& n1,tiny_vec<float,3>& n2,tiny_vec<float,3>& n3)
+triangle::triangle(const tiny_vec<float,3>& p0, const tiny_vec<float,3>& p1, const tiny_vec<float,3>& p2,
+	const tiny_vec<float,3>& n1, const tiny_vec<float,3>& n2, const tiny_vec<float,3>& n3)
 {
 	v0=p0;
 	edge1=p1-p0;
@@ -23,7 +23,7 @@ triangle::triangle(tiny_vec<float,3>& p0,tiny_vec<float,3>& p1,tiny_vec<float,3>
 	normal.normalize();
 }
 	
-triangle::triangle(tiny_vec<float,3>& p0,tiny_vec<float,3>& p1,tiny_vec<float,3>& p2)
+triangle::triangle(const tiny_vec<float,3>& p0, const tiny_vec<float,3>& p1, const tiny_vec<float,3>& p2)
 	
 {
 	v0.set(p0(0),p0(1),p0(2));

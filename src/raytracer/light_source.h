@@ -3,7 +3,7 @@
 // terms of the BSD license.
 
 #pragma once
-#include "tiny_vec.h"
+#include "../common/tiny_vec.h"
 #include "intersection_info.h"
 
 

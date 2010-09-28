@@ -3,9 +3,8 @@
 // terms of the BSD license.
 
 #pragma once
-#include "tiny_vec.h"
-#include "mat.h"
-
+#include <common/tiny_vec.h>
+#include <common/mat.h>
 
 template <typename T>
 class ray
@@ -81,7 +80,7 @@ public:
 	void transform(const mat<T>& m)
 	{
 		set_origin(unhomog(tiny_vec<float,4>(m*homog(origin))));
-		tiny_vec<float,4> dirh = direction;
+		tiny_vec<float,4> dirh(direction);
 		dirh[3]=0;
 		dirh=m*dirh;
 		tiny_vec<float,3> dir(dirh.begin(),dirh.end()-1);

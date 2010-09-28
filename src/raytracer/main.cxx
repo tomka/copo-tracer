@@ -24,10 +24,11 @@
 #include "image_io.h"
 #include "phaseshift_pattern.h"
 #include "graycode_pattern.h"
-#include "checkerboard_pattern.h"
+#include <common/checkerboard_pattern.h>
+#include <common/on_off_pattern.h>
 #include "cg_camera.h"
 #include "vision_camera.h"
-#include "file_utils.h"
+#include <common/file_utils.h>
 
 
 
@@ -204,7 +205,9 @@ int main(int argc, char** argv)
 	projector_light *proj = new projector_light;
 	proj->set_look_at(tiny_vec<float,3>(12,20,20),tiny_vec<float,3>(6,2,6),tiny_vec<float,3>(0,1,0));
 	proj->set_color(0.8f,0.8f,0.8f);
-	mat<tiny_vec<float,3> >checker = create_checker_board(1024,768,40, 30); 
+
+    
+	mat<tiny_vec<float,3> >checker = create_checker_board<float>(1024,768,40, 30);
 	proj->set_projector_image(&checker,20.0f);
 	my_scene->add_light(proj);
 
@@ -224,11 +227,12 @@ int main(int argc, char** argv)
 		write_bmp(image1,"../temp/mand.bmp");
 	}*/
 
+    
 	rgb_image_sequence on_off_patterns = create_on_off_sequence(1024, 768);
 	for(int i = 0; i< (int)on_off_patterns.size();i++)
 	{
 	
-		mat<tiny_vec<float,3>> pat = uchar_2_float(on_off_patterns[i]);
+		mat<tiny_vec<float,3> > pat = uchar_2_float(on_off_patterns[i]);
 		proj->set_projector_image(&pat,20.0f);	
 
 		mat<tiny_vec<unsigned char,3> > image1 = tracer.render();
@@ -237,7 +241,7 @@ int main(int argc, char** argv)
 		if(i == 1)
 			write_bmp(image1,"../datasets/on_off_graycode/off.bmp");
 	}
-
+    
 
 	/*mat<float> depth_image = tracer.get_depth_image();
 	
@@ -252,16 +256,18 @@ int main(int argc, char** argv)
 
 	write_bmp(float_2_uchar(gray_2_rgb(depth_image)),"../datasets/on_off_graycode/depth.bmp");*/
 	
+    
 	rgb_image_sequence gcpatterns = create_column_graycode_sequence(1024, 768);
 	for(int i = 0; i< (int)gcpatterns.size();i++)
 	{
 	
-		mat<tiny_vec<float,3>> pat = uchar_2_float(gcpatterns[i]);
+		mat<tiny_vec<float,3> > pat = uchar_2_float(gcpatterns[i]);
 		proj->set_projector_image(&pat,20.0f);	
 
 		mat<tiny_vec<unsigned char,3> > image1 = tracer.render();
 		write_bmp(image1,get_numbered_filename("../datasets/on_off_graycode/gc",i,"bmp"));
 	}
+    
 
 	
 	

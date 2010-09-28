@@ -263,7 +263,7 @@ public:
 		std::for_each(begin(),end(),[&s](T& elem){elem+=s;});
 #else
 		for(int i = 0; i < size(); i++)
-			data[i]+= s;
+			_data[i]+= s;
 #endif
 		return *this;
 	}

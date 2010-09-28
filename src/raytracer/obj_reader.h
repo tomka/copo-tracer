@@ -42,7 +42,7 @@ struct obj_reader
     std::vector<obj_polygon> faces; 
 
 
-	void rescale(tiny_vec<float,3>& minv, tiny_vec<float,3>& maxv, bool uniform_scale=true)
+	void rescale(const tiny_vec<float,3>& minv, const tiny_vec<float,3>& maxv, bool uniform_scale=true)
 	{
 		tiny_vec<float,3> lo(std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity());
 		tiny_vec<float,3> hi(-std::numeric_limits<float>::infinity(),-std::numeric_limits<float>::infinity(),-std::numeric_limits<float>::infinity());

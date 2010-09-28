@@ -5,7 +5,7 @@
 #ifndef INTERSECTION_INFO_H
 #define INTERSECTION_INFO_H
 
-#include "tiny_vec.h"
+#include "../common/tiny_vec.h"
 #include "ray.h"
 
 #ifndef PRIMITIVE_H
@@ -44,7 +44,7 @@ public:
 	tiny_vec<float,3> get_refracted_dir(float n1, float n2,bool &total_reflection) const;
 
 	intersection_info();
-	intersection_info(ray<float>& r, float l) ;
+	intersection_info(const ray<float>& r, float l) ;
 };
 
 #endif

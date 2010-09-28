@@ -20,11 +20,11 @@ public:
 
 	std::pair<tiny_vec<float,3>, tiny_vec<float,3> > calc_bounds();
 
-    void extend(tiny_vec<float,3> a);
+    void extend(const tiny_vec<float,3> a);
 
-	void extend(std::pair<tiny_vec<float,3>,tiny_vec<float,3> >& minmax);
+	void extend(const std::pair<tiny_vec<float,3>, const tiny_vec<float,3> >& minmax);
  
-    void extend(box& b);
+    void extend(const box& b);
  
     void clear();
 

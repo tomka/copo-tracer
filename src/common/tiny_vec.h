@@ -247,7 +247,7 @@ tiny_vec<T,N>::tiny_vec(){}
 template <typename T, int N>
 tiny_vec<T,N>::tiny_vec(size_t n, const T* marray)
 {			
-	std::copy(marray,marray+_size,begin());		
+	std::copy(marray,marray+size(),begin());		
 }
 
 template <typename T, int N>
@@ -408,7 +408,7 @@ void tiny_vec<T,N>::ones()
 template <typename T, int N>
 void tiny_vec<T,N>::ones(size_t m)
 {
-	resize(m);
+	//resize(m);
 	T one;
 	one = 1;
 	std::fill(begin(), end(), one);
@@ -976,7 +976,7 @@ size_t tiny_vec<T,N>::max_index()
 template <typename T, int N>
 T& tiny_vec<T,N>::median_elem()
 {
-	iterator it= begin() + _size/2;
+	iterator it= begin() + size()/2;
 	std::nth_element(begin(),it,end());
 	return *it;
 }
@@ -984,7 +984,7 @@ T& tiny_vec<T,N>::median_elem()
 template <typename T, int N>
 size_t tiny_vec<T,N>::median_index()
 {
-	return begin() +_size/2;
+	return begin() +size()/2;
 }
 
 template <typename T, int N>

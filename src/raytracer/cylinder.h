@@ -11,7 +11,7 @@ class cylinder: public primitive
 public:
 	cylinder();
 	
-	cylinder(tiny_vec<float,3>& p1, tiny_vec<float,3>& p2,const float& r);
+	cylinder(const tiny_vec<float,3>& p1, const tiny_vec<float,3>& p2, const float& r);
 	
 	void calc_normal(intersection_info* hit);
 	

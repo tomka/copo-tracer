@@ -17,7 +17,7 @@ transformation_group::transformation_group(mat<float>& tr)
 	set_transformation(tr);
 }
 
-void transformation_group::set_transformation(mat<float>& T)
+void transformation_group::set_transformation(const mat<float>& T)
 {
 	trafo = T;
 

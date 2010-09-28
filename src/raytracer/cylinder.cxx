@@ -9,7 +9,7 @@ cylinder::cylinder():bottom(0,0,0),top(0,1,0),radius(0.25),finite(true),caps(tru
 {
 }
 	
-cylinder::cylinder(tiny_vec<float,3>& p1, tiny_vec<float,3>& p2,const float& r)
+cylinder::cylinder(const tiny_vec<float,3>& p1, const tiny_vec<float,3>& p2,const float& r)
 {
 	bottom = p1;
 	top = p2;

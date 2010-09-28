@@ -28,7 +28,7 @@ std::pair<tiny_vec<float,3>, tiny_vec<float,3> > box::calc_bounds()
 	return std::make_pair(minimum,maximum);
 }
 
-void box::extend(tiny_vec<float,3> a)
+void box::extend(const tiny_vec<float,3> a)
 { 
 	for(int i = 0; i < 3;i++)
 	{
@@ -37,13 +37,13 @@ void box::extend(tiny_vec<float,3> a)
 	}
 }
 
-void box::extend(std::pair<tiny_vec<float,3>,tiny_vec<float,3> >& minmax)
+void box::extend(const std::pair<tiny_vec<float,3>, const tiny_vec<float,3> >& minmax)
 {
 	extend(minmax.first);
 	extend(minmax.second);
 }
 
-void box::extend(box& b)
+void box::extend(const box& b)
  {
       extend(b.minimum);
       extend(b.maximum);
