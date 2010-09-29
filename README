@@ -1,0 +1,22 @@
+copo-tracer
+===========
+
+This is a small test environment to render scenes with a
+ray-tracer. It is meant to elaborate some different snow
+rendering techniques. There are no further dependencies.
+The original source code was provided by Sören König
+(Soeren.Koenig AT tu-dresden.de). You are free to modify
+and/or redistribute that code in terms of the BSD license.
+
+
+Building
+========
+
+The project uses cmake and recommends an out-of-source build,
+e.g. for a Linux system:
+
+    mkdir build
+    cd build
+    cmake ..
+    make
+
