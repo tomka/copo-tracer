@@ -1,3 +1,7 @@
+// Copyright: The original source code was provided by Sören König (Soeren.Koenig
+// AT tu-dresden.de). You are free to modify and/or redistribute that code in
+// terms of the BSD license.
+
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
