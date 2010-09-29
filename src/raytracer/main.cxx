@@ -148,9 +148,12 @@ scene* create_scene()
 		
 		//a triangle mesh in a kdtree
 		kd_tree *mesh = new kd_tree();
-		group->add_primitive(mesh);
 		mesh->add_obj_mesh("../datasets/bunny.obj");
 		mesh->build_tree_spatial_median();
+		mesh->set_material(new blinn_phong());
+	    mesh->get_material()->set_diffuse(  0.5f, 0.5f, 0.0f  );
+		mesh->get_material()->set_reflectivity(0.1f);
+		group->add_primitive(mesh);
 		
 	
 		triangle *tri = new triangle(tiny_vec<float,3>(3.0f,0.0f,-10.0f),
