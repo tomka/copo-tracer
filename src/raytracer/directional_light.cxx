@@ -5,7 +5,6 @@
 #include "directional_light.h"
 #include <limits>
 
-
 directional_light::directional_light()
 {
 	set_direction(-1.0f,-1.0f,-1.0f);
@@ -40,13 +39,9 @@ tiny_vec<float,3> directional_light::get_attenuation_factors(const intersection_
 	return tiny_vec<float,3>(1.0f,1.0f,1.0f);
 }
 
-
 void directional_light::calc_light_direction_and_distance(intersection_info *hit)
 {
 	hit->set_light_dir(-direction);
-	hit->set_light_distance(std::numeric_limits<float>::infinity());	
+	hit->set_light_distance(std::numeric_limits<float>::infinity());
 }
-
-
-
 

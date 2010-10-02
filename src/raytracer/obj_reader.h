@@ -13,34 +13,24 @@
 #include <limits>
 #include "progress.h"
 
-
-
 struct obj_polygon
 {
 	std::vector<unsigned> vertex_indices; 
 	std::vector<unsigned> normal_indices; 
 	std::vector<unsigned> texcoord_indices; 
 	
-	
 	obj_polygon(unsigned n)
 	{
 		vertex_indices.resize(n);
-		
-		
 	}
-
 };
-
-
 
 struct obj_reader
 {
-
 	std::vector<tiny_vec<float,3> > vertices; 
     std::vector<tiny_vec<float,3> > normals; 
     std::vector<tiny_vec<float,2> > texcoords; 
     std::vector<obj_polygon> faces; 
-
 
 	void rescale(const tiny_vec<float,3>& minv, const tiny_vec<float,3>& maxv, bool uniform_scale=true)
 	{
@@ -55,7 +45,6 @@ struct obj_reader
 				hi[i] = (std::max)((*it)[i],hi[i]);
 			}
 		}
-
 		
 		float s1 = (maxv[0] - minv[0])/ (hi[0]-lo[0]);
 		float s2 = (maxv[1] - minv[1])/ (hi[1]-lo[1]);
@@ -63,39 +52,31 @@ struct obj_reader
 		if(uniform_scale)
 			s1=s3=s2;
 
-
 		float t1 = 0.5f*(minv[0]+maxv[0]) - s1*0.5f*(lo[0]+hi[0]);
 		float t2 = 0.5f*(minv[1]+maxv[1]) - s2*0.5f*(lo[1]+hi[1]);
 		float t3 = 0.5f*(minv[2]+maxv[2]) - s3*0.5f*(lo[2]+hi[2]);
 
 		for(std::vector<tiny_vec<float,3> >::iterator it = vertices.begin(); it != vertices.end(); ++it)
 		{
-			
 				(*it)[0] = s1*(*it)[0]+t1;
 				(*it)[1] = s2*(*it)[1]+t2;
 				(*it)[2] = s3*(*it)[2]+t3;
-				
 		}
-
-
 	}
+
 	/*void flip(float x, float y, float z)
 	{
 		for(std::vector<tiny_vec<float,3> >::iterator it = vertices.begin(); it != vertices.end(); ++it)
 		{
-			
 				(*it)[0] = x*(*it)[0];
 				(*it)[1] = y*(*it)[1];
 				(*it)[2] = z*(*it)[2];
-				
 		}
-
 	}*/
 
 	void tokenize(const std::string& str,const std::string& delimiters,std::vector<std::string>& tokens)
 	{
 		tokens.clear();
-
     	
 		// skip delimiters at beginning.
 		std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
@@ -121,20 +102,18 @@ struct obj_reader
 		float d;
 		std::stringstream ss(str);
 		ss >> d;
+
 		return d;
-
 	}
-
-	
 
 	int str_2_int(const std::string& str)
 	{
 		int i;
 		std::stringstream ss(str);
 		ss >> i;
+
 		return i;
 	}
-
 
 	void show_stats()
 	{
@@ -143,6 +122,7 @@ struct obj_reader
 		std::cout << "num texcoords "<<texcoords.size()<<std::endl;
 		std::cout << "num faces "<<faces.size()<<std::endl;
 	}
+
 	bool read_obj(const std::string& filename)
 	{
 		std::streamoff filesize=0;
@@ -154,7 +134,6 @@ struct obj_reader
 			filesize = in.tellg();
 			in.seekg(0,std::ios::beg);
 		
-			
 			std::string line;
 			std::vector<std::string> tokens;
 			vertices.clear();
@@ -162,14 +141,11 @@ struct obj_reader
 			texcoords.clear(); 
 			faces.clear(); 
 				
-		
 			std::string::size_type pos;
-			
 
 			while(std::getline(in,line,'\n'))
 			{
 				progress((float) in.tellg(),(float)filesize);
-					
 
 				pos = line.find(std::string("#"));
 				if(std::string::npos != pos)
@@ -197,7 +173,6 @@ struct obj_reader
 					read_texcoord(line);
 					continue;
 				}
-				
 					
 				pos = line.find("f ");
 				if(std::string::npos != pos)
@@ -205,18 +180,16 @@ struct obj_reader
 					read_polygon(line);
 					continue;
 				}
-
-									
-				
 			}
+
 			in.close();
 			std::cout << "\r                      \n";
 			return true;
 		}
+
 		std::cout << "error reading file "<<filename<<std::endl;
 		return false;
 	}
-
 
 	void read_vertex(const std::string& line)
 	{
@@ -252,7 +225,6 @@ struct obj_reader
 		texcoords.push_back(v);
 	}
 
-	
 	void read_polygon(const std::string& line)
 	{
 		std::vector<std::string> tokens;
@@ -260,7 +232,6 @@ struct obj_reader
 		
 		obj_polygon poly(tokens.size() - 1);
 		
-
 		for(unsigned i = 1; i < tokens.size(); i++)
 		{ 
 			std::vector<std::string> smaller_tokens;
@@ -270,12 +241,9 @@ struct obj_reader
 			//if texture is not specified but normal
 			if(smaller_tokens.size() == 2)
 			{
-				
-
 				poly.normal_indices.push_back(str_2_int(smaller_tokens[1])-1); 
 			}
 			
-      
 			//if texture and normals are specified 
 			if(smaller_tokens.size() == 3)
 			{
@@ -283,14 +251,9 @@ struct obj_reader
 				poly.normal_indices.push_back(str_2_int(smaller_tokens[2])-1); 
 				 
 			}
-      } 
+      }
+
 	  faces.push_back(poly); 
-	 
 	}
-
 };
-
-
-
-
 

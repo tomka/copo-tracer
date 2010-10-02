@@ -24,13 +24,9 @@ public:
 	
 	virtual void calc_light_direction_and_distance(intersection_info *hit);
 	
-	
 private:
 	tiny_vec<float,3> direction;
-	
-	
 };
 
-
-
 #endif
+

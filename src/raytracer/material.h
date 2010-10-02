@@ -28,9 +28,11 @@ public:
 	void set_reflectivity(float refl);
 	float get_reflectivity()const ;
 
-//	void set_refractivity(float refrac) ;
-//	float get_refractivity()const ;
-//	float get_index_of_refraction() const;
+	void set_refractivity(float refrac) ;
+	float get_refractivity() const ;
+
+    void set_index_of_refraction(float refrac_index);
+	float get_index_of_refraction() const;
 
 	virtual tiny_vec<float,3> shade(intersection_info* hit,light_source *light) =0;
 
@@ -43,7 +45,7 @@ protected:
 	float reflection;
 	float refraction;
 
-	//float refrac_index;
+    float refrac_index;
 };
 
 
