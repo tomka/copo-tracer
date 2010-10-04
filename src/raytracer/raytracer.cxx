@@ -146,6 +146,11 @@ tiny_vec<float,3> raytracer::trace( intersection_info* hit, bool inside, int rec
 			bool shadow=false;
 			if(light->is_casting_shadows())
 			{
+                /* to find out if the point is in shadow we must
+                 * shoot a "shadow ray" in the direction of the
+                 * light. If there is any intersection on the way,
+                 * the pount is in shadow, otherwise not.
+                 */
 				ray<float> shadow_ray(hit->get_location(),hit->get_light_dir());
 				shadow = render_scene->get_root()->any_intersection(shadow_ray,0.001f,hit->get_light_distance());
 			}
@@ -196,4 +201,5 @@ tiny_vec<float,3> raytracer::trace( intersection_info* hit, bool inside, int rec
 	else
 		return render_scene->get_clear_color();
 }
+
 

@@ -7,11 +7,10 @@
 
 #include "camera.h"
 
-
-
 class cg_camera : public camera
 {
 public:
+	cg_camera();
 	
 	void set_look_at(const tiny_vec<float,3>& eye, const tiny_vec<float,3>& center,const tiny_vec<float,3>& up);
 
@@ -19,17 +18,10 @@ public:
 
 	void set_frustrum(float left, float right,float top,float bottom,float znear,float zfar);
 
-	
-
 	tiny_vec<float,3> get_origin();
 
 	//get ray direction through  pixel(i,j) (di,dj) = (0.5,0.5) corresponds tothe center of the pixel
 	tiny_vec<float,3> get_direction(int i, int j, float di=0.5f, float dj=0.5f);
-
-	
-	
-
-	cg_camera();
 
 private:
 	tiny_vec<float,3> eye; 
@@ -38,7 +30,6 @@ private:
 	tiny_vec<float,3> w_dir;//z direction of camera coordinate frame
 
 	float left,right,top,bottom,znear,zfar;//view frustrum distances in camera coordinate frame
-	
 };
 
 #endif
