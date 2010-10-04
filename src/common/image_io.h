@@ -2,6 +2,7 @@
 // AT tu-dresden.de). You are free to modify and/or redistribute that code in
 // terms of the BSD license.
 
+#pragma once
 
 #include "tiny_vec.h"
 #include "mat.h"
