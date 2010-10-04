@@ -15,9 +15,6 @@ link_directories(
 
 #add_definitions(-DAPIENTRY=/**/)
 
-set(COPOTRACER_LIB
-)
-
 set(COPOTRACER_H
     src/raytracer/raytracer.h
     src/raytracer/plane.h
@@ -77,7 +74,6 @@ set(COPOTRACER_CPP
     src/raytracer/kd_tree.cxx
     src/raytracer/plane.cxx
     src/raytracer/blinn_phong.cxx
-    src/raytracer/main.cxx
     src/raytracer/light_source.cxx
     src/raytracer/primitive.cxx
     src/raytracer/vision_camera.cxx
@@ -98,10 +94,36 @@ set(COPOTRACER_CPP
     src/raytracer/scene.cxx
 )
 
-add_executable(copo-tracer
+set(COPOTRACER_SAMPLE_PROJECTOR_CPP
+    samples/projector/projector.cxx
+)
+
+set(COPOTRACER_SAMPLE_SIMPLE_CPP
+    samples/simple/simple.cxx
+)
+
+# The actual raytracer library
+add_library(copo-tracer
 	${COPOTRACER_CPP}
 	${COPOTRACER_H}
 )
 
-target_link_libraries(bin/copo-tracer ${COPOTRACER_LIB})
+# A simple sample, produces a normal raytrced image
+# and its depth map.
+add_executable(sample_simple
+	${COPOTRACER_H}
+    ${COPOTRACER_SAMPLE_SIMPLE_CPP}
+)
+
+target_link_libraries(sample_simple copo-tracer)
+
+# A sample which includes a projector looking from
+# above the scene. A sequence is produced and iIt
+# shows variing patterns.
+add_executable(sample_projector
+	${COPOTRACER_H}
+    ${COPOTRACER_SAMPLE_PROJECTOR_CPP}
+)
+
+target_link_libraries(sample_projector copo-tracer)
 
